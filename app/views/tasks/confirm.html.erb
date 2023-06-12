@@ -1,0 +1,16 @@
+<%= form_with(model: @task, url: tasks_path, local: true) do |form| %>
+  <h2>確認画面</h2>
+  <h3>タスク名</h3>
+    <%= form.hidden_field :title %>
+    <p><%= @task.title %></p>
+  <h3>詳細</h3>
+    <%= form.hidden_field :content %>
+    <p><%= @task.content %></p>
+  <div>
+    <%= form.submit %>
+  </div>
+
+  <div>
+    <%= form.submit "戻る", name: "back" %>
+  </div>
+<% end %>
