@@ -1,0 +1,21 @@
+<%= form_with(model: @task, local: true, url: choose_new_or_edit) do |form| %>
+<div class="low">
+  <% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h2>Found <%= @task.errors.count %> errors!</h2>
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+  </div>
+  <% end %>
+
+    <div><%= form.label :title %></div>
+    <div><%= form.text_field :title %></div>
+
+    <div><%= form.label :content %></div>
+    <div><%= form.text_area :content %></div>
+
+  <div><%= form.submit %></div>
+<% end %>
