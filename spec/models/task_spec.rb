@@ -4,12 +4,12 @@ RSpec.describe Task, type: :model do
   it "is invalid without a title" do
     task = Task.new(title: nil)
     task.valid?
-    expect(task.errors[:title]).to include("can't be blank")
+    expect(task.errors[:title]).to include("を入力してください")
   end
   it "is invalid with title is 256 or more characters" do
     task = Task.new(title: "a" * 256)
     task.valid?
-    expect(task.errors[:title]).to include("is too long (maximum is 255 characters)")
+    expect(task.errors[:title]).to include("は255文字以内で入力してください")
   end
   context "タスクの詳細が空の場合" do
     it "バリデーションにひっかかる" do
