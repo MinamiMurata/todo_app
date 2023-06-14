@@ -5,6 +5,14 @@ class TasksController < ApplicationController
     @tasks = Task.all
     if params[:sort_expired].present?
       @tasks = Task.all.order(deadline: :desc)
+    elsif params[:task].present?
+      if params[:task][:search].present? && params[:task][:status].present?
+        @tasks = @tasks.where("title LIKE ?", "%#{params[:task][:search]}%").where(status: params[:task][:status])
+      elsif params[:task][:search].present?
+        @tasks = @tasks.where("title LIKE ?", "%#{params[:task][:search]}%")
+      elsif params[:task][:status].present?
+        @tasks = @tasks.where(status: params[:task][:status])
+      end
     else
       @tasks = Task.all.order(created_at: :desc)
     end
@@ -61,6 +69,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline)
+    params.require(:task).permit(:title, :content, :deadline, :status)
   end
 end

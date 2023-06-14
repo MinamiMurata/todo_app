@@ -10,6 +10,9 @@
   <h3>終了期限</h3>
     <%= form.hidden_field :deadline %>
     <p><%= l @task.deadline, format: :short %></p>
+  <h3>ステータス</h3>
+    <%= form.hidden_field :status %>
+    <p><%= @task.status_i18n %></p>
   <div>
     <%= form.submit %>
   </div>
