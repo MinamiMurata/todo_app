@@ -6,5 +6,7 @@
 <%= @task.title %></p>
 <p>詳細: <br>
 <%= @task.content %></p>
+<p>終了期限: <br>
+<%= l @task.deadline, format: :short %></p>
 
 <p><%= link_to '戻る', tasks_path %></p>

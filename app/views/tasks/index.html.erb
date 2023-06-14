@@ -2,11 +2,13 @@
 
 <p><%= notice %></p>
 
+<%= link_to "▼終了期限順", tasks_path(sort_expired: "true") %>
 <table>
   <thead>
     <tr>
       <th>タスク名</th>
       <th>タスク作成日時</th>
+      <th>タスク終了期限</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +16,7 @@
       <tr>
         <td class="task_row"><%= task.title %></td>
         <td><%= l task.created_at, format: :short %></td>
+        <td><%= l task.deadline, format: :short %></td>
         <td><%= link_to '詳細', task_path(task.id) %></td>
         <td><%= link_to '編集', edit_task_path(task.id) %></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか?' } %></td>

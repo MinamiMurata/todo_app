@@ -15,6 +15,7 @@ RSpec.describe "タスク管理機能", type: :system do
     before do
       FactoryBot.create(:task)
       FactoryBot.create(:second_task)
+      FactoryBot.create(:third_task)
       visit tasks_path
     end
     context "一覧画面に遷移した場合" do
@@ -24,9 +25,15 @@ RSpec.describe "タスク管理機能", type: :system do
     end
     context "タスクが作成日時の降順に並んでいる場合" do
       it "新しいタスクが一番上に表示される" do
-        # ここに実装する
         task_list = all(".task_row")
-        expect(task_list[0].text).to start_with "2:"
+        expect(task_list[0].text).to start_with "3:"
+      end
+    end
+    context "タスクが終了期限の降順に並んでいる場合" do
+      it "終了期限が新しいタスクが一番上に表示される" do
+        click_on "▼終了期限順"
+        task_list = all(".task_row")
+        expect(task_list[0].text).to start_with "1:"
       end
     end
   end
