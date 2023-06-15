@@ -31,3 +31,10 @@ ja:
         high: 高
         middle: 中
         low: 低
+  views:
+    pagination:
+      first: "&laquo; "
+      last: " &raquo;"
+      previous: "&lsaquo; "
+      next: " &rsaquo;"
+      truncate: "..."
