@@ -19,8 +19,12 @@
 
     <div><%= form.label :deadline %></div>
     <div><%= form.datetime_select :deadline %></div>
+
     <div><%= form.label :status %></div>
     <%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.task.status.#{k}"), k]} %>
+    
+    <div><%= form.label :priority %></div>
+    <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.task.priority.#{k}"), k]} %>
 
   <div><%= form.submit %></div>
 <% end %>

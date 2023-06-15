@@ -10,5 +10,7 @@
 <%= l @task.deadline, format: :short %></p>
 <p>ステータス: <br>
 <%= @task.status_i18n %></p>
+<p>優先順位: <br>
+<%= @task.priority_i18n %></p>
 
 <p><%= link_to '戻る', tasks_path %></p>
