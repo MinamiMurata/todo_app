@@ -9,7 +9,7 @@ ja:
         title: タスク名
         content: 詳細
         deadline: 終了期限
-        priority: 優先順位
+        priority: 優先度
         status: ステータス
       user:
         name: 名前
@@ -21,3 +21,20 @@ ja:
   time:
     formats:
       date_only: "%Y/%m/%d"
+  enums:
+    task:
+      status:
+        not_started: 未着手
+        started: 着手中
+        completed: 完了
+      priority:
+        high: 高
+        middle: 中
+        low: 低
+  views:
+    pagination:
+      first: "&laquo; "
+      last: " &raquo;"
+      previous: "&lsaquo; "
+      next: " &rsaquo;"
+      truncate: "..."

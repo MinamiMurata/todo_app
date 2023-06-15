@@ -1,10 +1,11 @@
-<h2>タスク詳細</h2>
+<h4 class="mb-3">タスク詳細</h4>
 
 <p><%= notice %></p>
 
-<p>タスク名: <br>
-<%= @task.title %></p>
-<p>詳細: <br>
-<%= @task.content %></p>
+<p><strong>タスク名:&ensp;</strong><%= @task.title %></p>
+<p><strong>詳細:&ensp;</strong><%= @task.content %></p>
+<p><strong>終了期限:&ensp;</strong><%= l @task.deadline, format: :date_only %></p>
+<p><strong>ステータス:&ensp;</strong><%= @task.status_i18n %></p>
+<p><strong>優先度:&ensp;</strong><%= @task.priority_i18n %></p>
 
-<p><%= link_to '戻る', tasks_path %></p>
+<p class ="mt-2"><%= link_to '戻る', tasks_path %></p>
