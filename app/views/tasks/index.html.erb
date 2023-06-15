@@ -1,24 +1,27 @@
 <h3>タスク一覧</h3>
 
-<%= form_with url: tasks_path, method: :get, local: true do |form| %>
-  <%= form.text_field :search, class: "form-control me-2", type: "search", placeholder: "検索" %>
-  <%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.task.status.#{k}"), k]}, { include_blank: "指定なし" } %>
-  <%= form.submit '検索', name: nil %>
-<% end %>
-
 <p><%= notice %></p>
 
-<%= link_to "▼終了期限順", tasks_path(sort_expired: "true") %>
-<%= link_to "▼優先度順", tasks_path(sort_priority: "true") %>
+<div class="row">
+  <%= form_with url: tasks_path, method: :get, local: true do |form| %>
+  <div class="col">タスク名<%= form.text_field :search, class: "col-xs-4 m-3", placeholder: "検索" %>
+  ステータス<%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.task.status.#{k}"), k]}, { include_blank: "指定なし" }, class: "m-3" %>
+  <%= form.submit '検索', name: nil %></div>
+<% end %>
+</div>
+
+<div><%= link_to '新規登録', new_task_path, type: "button", class: "btn btn-primary mb-3" %></div>
+
 <table class="table">
   <thead>
     <tr>
-      <th>タスク名</th>
-      <th>詳しい内容</th>
-      <th>タスク作成日時</th>
-      <th>タスク終了期限</th>
-      <th>ステータス</th>
-      <th>優先順位</th>
+      <th class="col-1">タスク名</th>
+      <th class="col-1">詳しい内容</th>
+      <th class="col-1"><%= link_to "終了期限▼", tasks_path(sort_expired: "true") %></th>
+      <th class="col-1">登録日時</th>
+      <th class="col-1">ステータス</th>
+      <th class="col-1"><%= link_to "優先度▼", tasks_path(sort_priority: "true") %></th>
+      <th class="col-2" colspan="3"></th>
     </tr>
   </thead>
   <tbody>
@@ -26,8 +29,8 @@
       <tr>
         <td class="task_row"><%= task.title %></td>
         <td><%= task.content %></td>
+        <td><%= l task.deadline, format: :date_only %></td>
         <td><%= l task.created_at, format: :short %></td>
-        <td><%= l task.deadline, format: :short %></td>
         <td><%= task.status_i18n %></td>
         <td><%= task.priority_i18n %></td>
         <td><%= link_to '詳細', task_path(task.id), type: "button", class: "btn btn-outline-primary" %></td>
@@ -39,5 +42,3 @@
 </table>
 
 <%= paginate @tasks %>
-
-<p><%= link_to 'タスクを登録する', new_task_path %></p>

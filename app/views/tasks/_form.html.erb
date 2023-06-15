@@ -2,7 +2,7 @@
 <div class="low">
   <% if @task.errors.any? %>
   <div id="error_explanation">
-    <h2>Found <%= @task.errors.count %> errors!</h2>
+    <h4>Found <%= @task.errors.count %> errors!</h4>
       <ul>
         <% @task.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,20 +11,20 @@
   </div>
   <% end %>
 
-    <div><%= form.label :title %></div>
+    <div class="mt-3"><%= form.label :title %></div>
     <div><%= form.text_field :title %></div>
 
-    <div><%= form.label :content %></div>
+    <div class="mt-3"><%= form.label :content %></div>
     <div><%= form.text_area :content %></div>
 
-    <div><%= form.label :deadline %></div>
-    <div><%= form.datetime_select :deadline %></div>
+    <div class="mt-3"><%= form.label :deadline %></div>
+    <div><%= form.date_select :deadline %></div>
 
-    <div><%= form.label :status %></div>
+    <div class="mt-3"><%= form.label :status %></div>
     <%= form.select :status, Task.statuses.keys.map {|k| [I18n.t("enums.task.status.#{k}"), k]} %>
     
-    <div><%= form.label :priority %></div>
+    <div class="mt-3"><%= form.label :priority %></div>
     <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.task.priority.#{k}"), k]} %>
 
-  <div><%= form.submit %></div>
+  <div class="mt-3"><%= form.submit %></div>
 <% end %>

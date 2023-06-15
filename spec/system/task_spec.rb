@@ -9,8 +9,6 @@ RSpec.describe "タスク管理機能", type: :system do
         find("#task_deadline_1i").find("option[value='2023']").select_option
         find("#task_deadline_2i").find("option[value='6']").select_option
         find("#task_deadline_3i").find("option[value='20']").select_option
-        find("#task_deadline_4i").find("option[value='15']").select_option
-        find("#task_deadline_5i").find("option[value='00']").select_option
         find("#task_status").find("option[value='started']").select_option
         click_on "登録する"
         expect(page).to have_content "タスク1"
@@ -37,7 +35,7 @@ RSpec.describe "タスク管理機能", type: :system do
     end
     context "タスクが終了期限の降順に並んでいる場合" do
       it "終了期限が新しいタスクが一番上に表示される" do
-        click_on "▼終了期限順"
+        click_on "終了期限▼"
         sleep 0.5
         task_list = all(".task_row")
         expect(task_list.first.text).to start_with "1:"
@@ -45,7 +43,7 @@ RSpec.describe "タスク管理機能", type: :system do
     end
     context "タスクの優先順位が高い順に並んでいる場合" do
       it "優先順位が高いタスクが一番上に表示される" do
-        click_on "▼優先度順"
+        click_on "優先度▼"
         sleep 0.5
         task_list = all(".task_row")
         expect(task_list.first.text).to start_with "2:"

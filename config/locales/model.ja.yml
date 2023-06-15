@@ -9,7 +9,7 @@ ja:
         title: タスク名
         content: 詳細
         deadline: 終了期限
-        priority: 優先順位
+        priority: 優先度
         status: ステータス
       user:
         name: 名前
