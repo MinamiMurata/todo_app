@@ -25,7 +25,7 @@ ja:
     task:
       status:
         not_started: 未着手
-        started: 着手
+        started: 着手中
         completed: 完了
       priority:
         high: 高

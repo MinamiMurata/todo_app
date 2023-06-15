@@ -7,8 +7,8 @@ class TasksController < ApplicationController
     @tasks = Task.all.by_deadline if params[:sort_expired].present?
     @tasks = Task.all.by_priority if params[:sort_priority].present?
     @tasks = Task.search_word(params[:search]).search_status(params[:status]) if params[:search].present? && params[:status].present?
-    @tasks = Task.search_word(params[:search]) if params[:search].present?
-    @tasks = Task.search_status(params[:status]) if params[:status].present?
+    @tasks = Task.search_word(params[:search]) if params[:search].present? && params[:status].empty?
+    @tasks = Task.search_status(params[:status]) if params[:status].present? && params[:search].empty?
     @tasks = @tasks.page(params[:page]).per(10)
   end
 

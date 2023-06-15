@@ -10,6 +10,7 @@ RSpec.describe "タスク管理機能", type: :system do
         find("#task_deadline_2i").find("option[value='6']").select_option
         find("#task_deadline_3i").find("option[value='20']").select_option
         find("#task_status").find("option[value='started']").select_option
+        find("#task_priority").find("option[value='middle']").select_option
         click_on "登録する"
         expect(page).to have_content "タスク1"
       end
