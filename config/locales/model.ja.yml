@@ -18,6 +18,7 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         remember_me: ログインを記憶
+        admin: 管理者権限
   time:
     formats:
       date_only: "%Y/%m/%d"
@@ -31,6 +32,10 @@ ja:
         high: 高
         middle: 中
         low: 低
+    user:
+      admin:
+        admin_user: 管理者ユーザ
+        general_user: 一般ユーザ
   views:
     pagination:
       first: "&laquo; "
