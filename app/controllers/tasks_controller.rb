@@ -2,13 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.all
-    @tasks = Task.all.by_created_at
-    @tasks = Task.all.by_deadline if params[:sort_expired].present?
-    @tasks = Task.all.by_priority if params[:sort_priority].present?
-    @tasks = Task.search_word(params[:search]).search_status(params[:status]) if params[:search].present? && params[:status].present?
-    @tasks = Task.search_word(params[:search]) if params[:search].present? && params[:status].empty?
-    @tasks = Task.search_status(params[:status]) if params[:status].present? && params[:search].empty?
+    @tasks = current_user.tasks
+    @tasks = current_user.tasks.by_created_at
+    @tasks = current_user.tasks.by_deadline if params[:sort_expired].present?
+    @tasks = current_user.tasks.by_priority if params[:sort_priority].present?
+    @tasks = current_user.tasks.search_word(params[:search]).search_status(params[:status]) if params[:search].present? && params[:status].present?
+    @tasks = current_user.tasks.search_word(params[:search]) if params[:search].present? && params[:status].empty?
+    @tasks = current_user.tasks.search_status(params[:status]) if params[:status].present? && params[:search].empty?
     @tasks = @tasks.page(params[:page]).per(10)
   end
 
@@ -17,12 +17,12 @@ class TasksController < ApplicationController
   end
 
   def confirm
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     render :new if @task.invalid?
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else

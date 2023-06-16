@@ -1,3 +1,6 @@
 <h4><%= @user.name %>のページ</h4>
 
+<h5 class="mt-4">メールアドレス</h5>
 <p>メールアドレス: <%= @user.email %></p>
+
+<%= link_to '戻る', tasks_path, class: "mt-2" %>
