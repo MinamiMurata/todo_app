@@ -16,9 +16,9 @@
     <nav class="my-4 my-md-2 mr-md-6">
     <% if logged_in? %>
       <% if current_user.admin? %>
-        <%= link_to "管理者画面", admin_users_path, class: "p-2 text-dark" %>
+        <%= link_to "管理者画面", admin_users_path, class: "mr-1 btn btn-outline-secondary btn-sm" %>
       <% end %>
-      <%= link_to "Profile", user_path(current_user.id), class: "p-2 text-dark" %>
+      <%= link_to "Profile", user_path(current_user.id), class: "mr-1 p-2 text-dark" %>
       <%= link_to "Logout", session_path(current_user.id), method: :delete, class: "mr-1 btn btn-secondary btn-sm" %>
     <% else %>
       <%= link_to "Sign up", new_user_path, class: "p-2 text-dark" %>

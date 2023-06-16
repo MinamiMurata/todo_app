@@ -32,16 +32,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if User.where(admin: true).count <= 1 && @user.admin?
-      flash[:danger] = "管理者がいなくなってしまうので、ユーザーを変更できません。"
+    if @user.update(user_params)
+      flash[:notice] = "ユーザー情報を編集しました！"
       redirect_to admin_users_path
     else
-      if @user.update(user_params)
-        flash[:notice] = "ユーザー情報を編集しました！"
-        redirect_to admin_users_path
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
