@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to tasks_path(@user.id)
+      redirect_to tasks_path
     else
       render :new
     end
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to tasks_path unless current_user.id == @user.id
   end
 
   private
