@@ -5,9 +5,14 @@
 #   Task.create!(title: title, content: content, deadline: deadline)
 # end
 
-50.times do |n|
+10.times do |n|
   name = Faker::Games::SuperMario.name
   email = Faker::Internet.email
   password = "password"
-  User.create!(name: name, email: email, password: password)
+  User.create!(name: name, email: email, password: password, admin: false)
 end
+
+name_admin = "admin1"
+email_admin = "admin1@gmail.com"
+password_admin = "adminuser"
+User.create!(name: name_admin, email: email_admin, password: password_admin, admin: true)
