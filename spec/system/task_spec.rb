@@ -1,6 +1,16 @@
 require "rails_helper"
 RSpec.describe "タスク管理機能", type: :system do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:task) { FactoryBot.create(:task, user: user) }
+  let!(:second_task) { FactoryBot.create(:second_task, user: user) }
+  let!(:third_task) { FactoryBot.create(:third_task, user: user) }
   describe "新規作成機能" do
+    before do
+      visit new_session_path
+      fill_in "session[email]", with: "generaltest@test.com"
+      fill_in "session[password]", with: "123456"
+      click_on "Log in"
+    end
     context "タスクを新規作成した場合" do
       it "作成したタスクが表示される" do
         visit new_task_path
@@ -18,10 +28,10 @@ RSpec.describe "タスク管理機能", type: :system do
   end
   describe "一覧表示機能" do
     before do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-      FactoryBot.create(:third_task)
-      visit tasks_path
+      visit new_session_path
+      fill_in "session[email]", with: "generaltest@test.com"
+      fill_in "session[password]", with: "123456"
+      click_on "Log in"
     end
     context "一覧画面に遷移した場合" do
       it "作成済みのタスク一覧が表示される" do
@@ -52,20 +62,25 @@ RSpec.describe "タスク管理機能", type: :system do
     end
   end
   describe "詳細表示機能" do
+    before do
+      visit new_session_path
+      fill_in "session[email]", with: "generaltest@test.com"
+      fill_in "session[password]", with: "123456"
+      click_on "Log in"
+    end
     context "任意のタスク詳細画面に遷移した場合" do
       it "該当タスクの内容が表示される" do
-        task = FactoryBot.create(:task, title: "任意タスク")
         visit task_path(task.id)
-        expect(page).to have_content "任意タスク"
+        expect(page).to have_content "1:F"
       end
     end
   end
   describe "検索機能" do
     before do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-      FactoryBot.create(:third_task)
-      visit tasks_path
+      visit new_session_path
+      fill_in "session[email]", with: "generaltest@test.com"
+      fill_in "session[password]", with: "123456"
+      click_on "Log in"
     end
     context "タイトルであいまい検索をした場合" do
       it "検索キーワードを含むタスクで絞り込まれる" do

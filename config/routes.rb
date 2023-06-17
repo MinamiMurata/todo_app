@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "sessions/new"
   root "tasks#index"
   resources :tasks do
     collection { post :confirm }

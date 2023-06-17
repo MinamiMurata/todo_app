@@ -3,7 +3,7 @@
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h5><%= pluralize(@user.errors.count, "つのエラー") %> があり、<%= @user.name %> の情報が登録できませんでした:</h4>
+      <h5><%= pluralize(@user.errors.count, "つのエラー") %> があり、<%= @user.name %> の情報が登録できませんでした。</h4>
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li class="error_message"><%= message %></li>
