@@ -18,6 +18,7 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         remember_me: ログインを記憶
+        admin: 管理者権限
   time:
     formats:
       date_only: "%Y/%m/%d"
