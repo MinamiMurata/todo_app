@@ -27,10 +27,12 @@
     <%= form.select :priority, Task.priorities.keys.map {|k| [I18n.t("enums.task.priority.#{k}"), k]} %>
     
     <div class="mt-3"><%= form.label :label %></div>
-    <% Label.all.each do |label| %>
-      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
-      <%= label.name %>
-    <% end %>
+    <div class="label_row">
+      <% Label.all.each do |label| %>
+        <%= form.check_box :label_ids, { multiple: true, disabled: label[:disabled], include_hidden: false }, label[:id] %>
+        <%= form.label :label_ids, label.name, value: label[:id] %>
+      <% end %>
+    </div>
 
   <div class="mt-3"><%= form.submit %></div>
 <% end %>
