@@ -1,5 +1,5 @@
 10.times do |n|
-  name = Faker::Games::SuperMario.name
+  name = Faker::Games::SuperMario.character
   email = Faker::Internet.email
   password = "password"
   User.create!(name: name, email: email, password: password, admin: false)
@@ -23,4 +23,4 @@ end
 
 10.times { |id| Label.create!(id: id, name: Faker::ProgrammingLanguage.name) }
 
-Task.all.each { |task| task.labellings.create!(task_id: task, label_id: rand(1..10)) }
+Task.all.each { |task| task.labellings.create!(task_id: task, label_id: rand(1..5)) }
