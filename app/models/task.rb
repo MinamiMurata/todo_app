@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :content, presence: true, length: { maximum: 500 }
   belongs_to :user
+  has_many :labellings, dependent: :destroy
+  has_many :labels, through: :labellings
 
   enum status: { not_started: 0, started: 1, completed: 2 }
   enum priority: { high: 0, middle: 1, low: 2 }

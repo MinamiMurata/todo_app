@@ -4,6 +4,7 @@ RSpec.describe "タスク管理機能", type: :system do
   let!(:task) { FactoryBot.create(:task, user: user) }
   let!(:second_task) { FactoryBot.create(:second_task, user: user) }
   let!(:third_task) { FactoryBot.create(:third_task, user: user) }
+  let!(:label) { FactoryBot.create(:label) }
   describe "新規作成機能" do
     before do
       visit new_session_path
@@ -21,6 +22,7 @@ RSpec.describe "タスク管理機能", type: :system do
         find("#task_deadline_3i").find("option[value='20']").select_option
         find("#task_status").find("option[value='started']").select_option
         find("#task_priority").find("option[value='middle']").select_option
+        check "first"
         click_on "登録する"
         expect(page).to have_content "タスク1"
       end
@@ -102,6 +104,48 @@ RSpec.describe "タスク管理機能", type: :system do
         find("#status").find("option[value='completed']").select_option
         click_on "検索"
         expect(page).to have_content "3:F"
+      end
+    end
+    context "ラベルで検索した場合" do
+      it "一致するラベルがついたタスクが絞り込まれる" do
+        task = FactoryBot.create(:fourth_task, user: user)
+        visit edit_task_path(task.id)
+        check "first"
+        click_on "更新する"
+        select "first", from: "label_id"
+        click_on "検索"
+        sleep 0.5
+        task_list = all(".task_row")
+        expect(task_list.count).to eq 1
+      end
+    end
+    context "タイトルのあいまい検索とラベルで検索した場合" do
+      it "検索キーワードをタイトルに含み、かつ一致するラベルがついたタスクが絞り込まれる" do
+        task = FactoryBot.create(:fourth_task, user: user)
+        visit edit_task_path(task.id)
+        check "first"
+        click_on "更新する"
+        fill_in "search", with: "Factory"
+        select "first", from: "label_id"
+        click_on "検索"
+        sleep 0.5
+        task_list = all(".task_row")
+        expect(task_list.count).to eq 1
+      end
+    end
+    context "タイトルのあいまい検索とステータス検索とラベルで検索した場合" do
+      it "検索キーワードをタイトルに含み、かつ一致するステータス・ラベルがついたタスクが絞り込まれる" do
+        task = FactoryBot.create(:fourth_task, user: user)
+        visit edit_task_path(task.id)
+        check "first"
+        click_on "更新する"
+        fill_in "search", with: "Factory"
+        find("#status").find("option[value='started']").select_option
+        select "first", from: "label_id"
+        click_on "検索"
+        sleep 0.5
+        task_list = all(".task_row")
+        expect(task_list.count).to eq 0
       end
     end
   end

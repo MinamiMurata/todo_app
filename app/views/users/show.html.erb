@@ -11,6 +11,7 @@
       <th class="col-1">ステータス</th>
       <th class="col-1">優先度</th>
       <th class="col-1">作成者</th>
+      <th class="col-1">ラベル</th>
       <th class="col-2" colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +24,11 @@
         <td><%= task.status_i18n %></td>
         <td><%= task.priority_i18n %></td>
         <td><%= task.user.name %></td>
+        <td>
+        <% task.labels.each do |label| %>
+          <span class ="badge bg-secondary text-light m-1"><%= label.name %></span>
+        <% end %>
+        </td>
         <td><%= link_to '詳細', task_path(task.id), type: "button", class: "btn btn-outline-primary btn-sm" %></td>
         <td><%= link_to '編集', edit_task_path(task.id), type: "button", class: "btn btn-outline-success btn-sm" %></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除しますか?' }, type: "button", class: "btn btn-outline-danger btn-sm" %></td>

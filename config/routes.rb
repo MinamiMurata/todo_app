@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: %i[new create destroy]
   resources :users, only: %i[new create show]
-
   namespace :admin do
     resources :users
+    resources :labels, except: :show
   end
 end

@@ -31,4 +31,20 @@ FactoryBot.define do
     status { 2 }
     priority { 2 }
   end
+  factory :fifth_task, class: Task do
+    user
+    title { "5:Factoryで作ったデフォルトのタイトル" }
+    content { "5:Factoryで作ったデフォルトのコンテント" }
+    deadline { 1.days.from_now }
+    status { 0 }
+    priority { 0 }
+  end
+  factory :sixth_task, class: Task do
+    user
+    title { "6:Factoryで作ったデフォルトのタイトル" }
+    content { "6:Factoryで作ったデフォルトのコンテント" }
+    deadline { 2.days.from_now }
+    status { 1 }
+    priority { 1 }
+  end
 end
